@@ -34,7 +34,7 @@ int kv_put(kv_t *db, char *key, char *value) {
     size_t idx = hash(key, db -> capacity);
 
     for (int i = 0; i < db -> capacity -1; i++) {
-        size_t real_idx = (idx + 1) % db -> capacity;
+        size_t real_idx = (idx + i) % db -> capacity;
         kv_entry_t *entry = &db -> entries[real_idx];
 
         if (entry -> key && entry -> key != (void*)TOMBSTONE && !strcmp(entry -> key, key)) {
