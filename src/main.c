@@ -6,8 +6,8 @@ int main() {
     printf("%p\n", table);
     printf("%ld\n", table -> capacity);
 
-    int a = kv_put(table, "hehe", "haha");
-    int b = kv_put(table, "hehe", "hoho");
+    int a = kv_put(table, "color", "red");
+    int b = kv_put(table, "color", "blue");
     int c = kv_put(table, "lala", "hoho");
 
     printf("%d, %d, %d\n", a, b, c);
