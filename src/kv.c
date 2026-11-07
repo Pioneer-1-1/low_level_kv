@@ -142,7 +142,7 @@ kv_t *kv_init(size_t capacity) {
 }
 
 void kv_free(kv_t *db) {
-    // if (!db) return -1;
+    if (!db) return;
 
     // free entries
     for (int i = 1; i < db -> capacity -1; i++) {
