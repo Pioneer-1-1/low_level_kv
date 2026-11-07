@@ -19,6 +19,30 @@ size_t hash(char *val, int capacity) {
     return hash % capacity; 
 }
 
+// fn kv_get
+// params:
+//  - db:       a pointer to the db
+//  - key:      a pointer to the key value
+// returns: a pointer to the key if found, NULL if not found
+char *kv_get(kv_t *db, char *key)  {
+    if (!db || !key) return NULL;
+
+    size_t idx = hash(key, db -> capacity);
+
+    for (int i = 0; i < db -> capacity -1; i++) {
+        size_t real_idx  = (idx + i) % db -> capacity; 
+        kv_entry_t *entry  = &db -> entries[real_idx];
+
+        if (entry -> key == NULL) return NULL; 
+        if (entry -> key 
+            && entry -> key != (void*)TOMBSTONE
+            && !strcmp(entry -> key, key)
+        ) return entry -> value;
+    }
+
+    return NULL;
+}
+
 // fn kv_put 
 // params:
 //  - db:       a pointer to the db
@@ -67,6 +91,8 @@ int kv_put(kv_t *db, char *key, char *value) {
     // database is full
     return -2;
 }
+
+
 
 
 kv_t *kv_init(size_t capacity) {

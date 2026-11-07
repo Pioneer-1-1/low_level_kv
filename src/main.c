@@ -2,6 +2,7 @@
 #include <kv.h>
 
 int main() {
+    printf("Hello world 2\n");
     kv_t  *table = kv_init(1024);
     printf("%p\n", table);
     printf("%ld\n", table -> capacity);
@@ -17,4 +18,10 @@ int main() {
             printf("%s: %s\n", table -> entries[i].key, table -> entries[i].value);
         }
     }
+
+    char *val = kv_get(table, "color");
+    char *val2 = kv_get(table, "lala");
+    char *val3 = kv_get(table, "doesn't exist");
+
+    printf("%s, %s, %s\n", val, val2, val3);
 }

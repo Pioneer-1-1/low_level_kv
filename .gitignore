@@ -1,0 +1,5 @@
+# Ignore all bin directories
+**/bin/
+
+# Ignore the cache
+**/.cache/

@@ -1,0 +1,28 @@
+[
+  {
+    "file": "src/kv.c",
+    "arguments": [
+      "/usr/bin/gcc",
+      "-o",
+      "./bin/test",
+      "-I./inc/",
+      "src/kv.c",
+      "-Wall"
+    ],
+    "directory": "/workspaces/key_value/low_level_kv",
+    "output": "./bin/test"
+  },
+  {
+    "file": "src/main.c",
+    "arguments": [
+      "/usr/bin/gcc",
+      "-o",
+      "./bin/test",
+      "-I./inc/",
+      "src/main.c",
+      "-Wall"
+    ],
+    "directory": "/workspaces/key_value/low_level_kv",
+    "output": "./bin/test"
+  }
+]
