@@ -30,4 +30,7 @@ int main() {
     if (delete_test == NULL) {
         printf("NULL\n");
     }
+
+    kv_free(table);
+    table = NULL;
 }

@@ -94,9 +94,9 @@ int kv_put(kv_t *db, char *key, char *value) {
             // stack allocated values may be freed at some point therefore move to heap to give control of lifetime
             char *newval = strdup(value);
             if (!newval) {
-                free(newval);
                 return -1;
             }
+            free(entry -> value);
             entry -> value = newval;
             return 0;
         } 
@@ -121,9 +121,6 @@ int kv_put(kv_t *db, char *key, char *value) {
     return -2;
 }
 
-
-
-
 kv_t *kv_init(size_t capacity) {
     if (capacity == 0) return NULL;
 
@@ -142,4 +139,25 @@ kv_t *kv_init(size_t capacity) {
     } else {
         return table;
     }
+}
+
+int kv_free(kv_t *db) {
+    if (!db) return -1;
+
+    // free entries
+    for (int i = 1; i < db -> capacity -1; i++) {
+        kv_entry_t *e = &db -> entries[i];
+        if (e -> key && e -> key != (void*)TOMBSTONE) {
+            free(e -> key);
+            free(e -> value);
+            e -> key = NULL;
+            e -> value = NULL;
+            db -> count --;
+        }
+    }
+
+    free(db -> entries);
+    free(db);
+
+    return 0;
 }
